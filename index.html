@@ -6,6 +6,9 @@
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0F2444">
   <title>Escopo de serviços · IVM Estratégias</title>
+  <meta property="og:title" content="IVM Estratégias — Escopo de serviços">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -37,12 +40,19 @@
       background: var(--azul);
       color: var(--branco);
       text-align: center;
-      padding: 18px 20px 17px;
+      padding: 28px 20px 22px;
+    }
+
+    header .logo {
+      display: block;
+      margin: 0 auto;
+      width: 120px;
+      height: auto;
     }
 
     header .marca {
-      margin: 0;
-      font-size: 15px;
+      margin: 14px 0 0;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -269,10 +279,43 @@
       color: #5A616C;
       text-align: center;
     }
+
+    footer {
+      background: var(--azul);
+      color: var(--branco);
+      text-align: center;
+      padding: 22px 24px 28px;
+    }
+
+    footer .filete-curto {
+      width: 48px;
+      height: 2px;
+      background: var(--ouro);
+      border: 0;
+      margin: 0 auto 16px;
+    }
+
+    footer .nome {
+      margin: 0 0 6px;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    footer .linha {
+      margin: 0 auto;
+      max-width: 320px;
+      font-size: 0.75rem;
+      line-height: 1.45;
+      font-weight: 400;
+      color: #E7EAEF;
+    }
   </style>
 </head>
 <body>
   <header>
+    <img class="logo" src="assets/ivm-logo-negativo.png" width="120" height="155" alt="IVM Estratégias">
     <p class="marca">IVM Estratégias</p>
   </header>
   <hr class="filete">
@@ -423,6 +466,11 @@
       <p class="ajuda">As respostas abrem no seu WhatsApp como mensagem para a IVM. Basta confirmar o envio.</p>
     </form>
   </main>
+  <footer>
+    <hr class="filete-curto">
+    <p class="nome">IVM Estratégias</p>
+    <p class="linha">Apoio administrativo e operacional em processos de contratação pública</p>
+  </footer>
   <script>
     (function () {
       var WA_NUMBER = "5551993741005";
