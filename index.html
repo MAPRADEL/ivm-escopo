@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0F2444">
+  <title>Escopo de serviços · IVM Estratégias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul: #0F2444;
+      --ouro: #B08D57;
+      --grafite: #3A424F;
+      --branco: #ffffff;
+      --linha: #E4E1DB;
+      --fundo-marcado: #F4F6F9;
+      --erro: #9B1C1C;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--branco);
+      color: var(--grafite);
+      font-family: "Open Sans", "Segoe UI", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    header {
+      background: var(--azul);
+      color: var(--branco);
+      text-align: center;
+      padding: 18px 20px 17px;
+    }
+
+    header .marca {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .filete {
+      height: 2px;
+      background: var(--ouro);
+      border: 0;
+      margin: 0;
+    }
+
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 28px 20px 48px;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      color: var(--azul);
+      font-size: 1.7rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .abertura {
+      font-size: 1.075rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0 0 16px;
+      color: var(--azul);
+    }
+
+    .intro {
+      margin: 0 0 28px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      color: var(--azul);
+      font-size: 1.12rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    section {
+      margin: 0 0 32px;
+    }
+
+    .lead {
+      margin: 0 0 14px;
+      font-size: 0.975rem;
+    }
+
+    label.campo {
+      display: block;
+      margin: 0 0 16px;
+    }
+
+    label.campo span,
+    .rotulo {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--azul);
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--grafite);
+      background: var(--branco);
+      border: 1px solid #C9C6C0;
+      border-radius: 8px;
+      padding: 14px 14px;
+      min-height: 52px;
+      line-height: 1.4;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    input[type="text"]:focus,
+    textarea:focus,
+    .opcao:focus-within {
+      outline: 2px solid var(--azul);
+      outline-offset: 2px;
+      border-color: var(--azul);
+    }
+
+    .erro {
+      display: none;
+      color: var(--erro);
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin: 6px 0 0;
+    }
+
+    .erro.visivel { display: block; }
+
+    .campo.invalidado input {
+      border-color: var(--erro);
+    }
+
+    .opcao {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+      margin: 0 0 8px;
+      padding: 14px 14px;
+      min-height: 52px;
+      border: 1px solid var(--linha);
+      border-radius: 8px;
+      cursor: pointer;
+      background: var(--branco);
+    }
+
+    .opcao:has(input:checked) {
+      background: var(--fundo-marcado);
+      border-color: #C5CED8;
+    }
+
+    .opcao span.texto {
+      flex: 1;
+      padding-top: 1px;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      flex: 0 0 22px;
+      width: 22px;
+      height: 22px;
+      margin: 2px 0 0;
+      border: 2px solid var(--azul);
+      background: var(--branco);
+      position: relative;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] { border-radius: 4px; }
+    input[type="radio"] { border-radius: 50%; }
+
+    input[type="checkbox"]:checked {
+      background: var(--azul);
+    }
+
+    input[type="checkbox"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    input[type="radio"]:checked::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--azul);
+    }
+
+    .opcao-outro {
+      flex-wrap: wrap;
+    }
+
+    .opcao-outro input[type="text"] {
+      flex: 1 1 100%;
+      margin-top: 8px;
+      min-height: 48px;
+      display: none;
+    }
+
+    .opcao-outro:has(input[type="radio"]:checked) input[type="text"] {
+      display: block;
+    }
+
+    button[type="submit"] {
+      display: block;
+      width: 100%;
+      min-height: 56px;
+      margin-top: 8px;
+      padding: 16px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--azul);
+      color: var(--branco);
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:focus-visible {
+      outline: 2px solid var(--azul);
+      outline-offset: 3px;
+    }
+
+    button[type="submit"]:active {
+      transform: translateY(1px);
+    }
+
+    .ajuda {
+      margin: 12px 0 0;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: #5A616C;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="marca">IVM Estratégias</p>
+  </header>
+  <hr class="filete">
+  <main>
+    <h1>Escopo de serviços</h1>
+    <p class="abertura">Quem entra numa licitação só com o edital na mão vê as regras do certame, mas não o terreno, e não sabe o que vai encontrar.</p>
+    <p class="intro">A IVM Estratégias presta apoio administrativo e operacional em processos de contratação pública, em três frentes: apoio no processo, participação na disputa e inteligência de licitações. Elas podem ser contratadas juntas ou separadas. Marque o que interessa à operação de vocês. A proposta é montada a partir dessas marcações.</p>
+
+    <form id="form-escopo" action="#" method="get" novalidate>
+      <section>
+        <label class="campo" for="empresa">
+          <span>Empresa</span>
+          <input type="text" id="empresa" name="empresa" autocomplete="organization">
+        </label>
+        <label class="campo" id="campo-nome" for="nome">
+          <span>Nome e cargo de quem responde</span>
+          <input type="text" id="nome" name="nome" autocomplete="name" required aria-required="true" aria-describedby="erro-nome">
+          <p class="erro" id="erro-nome">Informe o nome e o cargo de quem responde.</p>
+        </label>
+      </section>
+
+      <section>
+        <h2>1. Apoio administrativo e operacional nas licitações</h2>
+        <label class="opcao">
+          <input type="checkbox" name="apoio" value="Busca de editais pré-qualificados (repositório compartilhado, por critérios como valor mínimo e objeto)">
+          <span class="texto">Busca de editais pré-qualificados (repositório compartilhado, por critérios como valor mínimo e objeto)</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="apoio" value="Triagem do edital, com a indicação de participar ou não">
+          <span class="texto">Triagem do edital, com a indicação de participar ou não</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="apoio" value="Análise do edital, com os riscos e as exigências que pedem atenção">
+          <span class="texto">Análise do edital, com os riscos e as exigências que pedem atenção</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="apoio" value="Modelos de pedido de esclarecimento e de impugnação, que a sua equipe protocola">
+          <span class="texto">Modelos de pedido de esclarecimento e de impugnação, que a sua equipe protocola</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="apoio" value="Modelos de recurso, contrarrazões e representação, que a sua equipe protocola">
+          <span class="texto">Modelos de recurso, contrarrazões e representação, que a sua equipe protocola</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="apoio" value="Apoio na fase de contrato e execução">
+          <span class="texto">Apoio na fase de contrato e execução</span>
+        </label>
+      </section>
+
+      <section>
+        <h2>2. Participação na disputa pela IVM</h2>
+        <label class="opcao">
+          <input type="checkbox" name="participacao" value="Participação completa na disputa: organização de cadastros, certidões e atestados; montagem e envio da proposta e dos documentos; operação da sessão e dos lances, dentro do valor inicial e do mínimo definidos pela sua empresa">
+          <span class="texto">Participação completa na disputa: organização de cadastros, certidões e atestados; montagem e envio da proposta e dos documentos; operação da sessão e dos lances, dentro do valor inicial e do mínimo definidos pela sua empresa</span>
+        </label>
+      </section>
+
+      <section>
+        <h2>3. Inteligência de licitações</h2>
+        <p class="lead">A pesquisa mostra o que o edital não conta: quais empresas já disputaram contratos desse tipo na região, em que faixa a disputa costumou fechar e quais falhas registradas afastaram participantes. Os estudos tratam de participantes históricos e apoiam a decisão de participar e de precificar, sem garantia de resultado.</p>
+        <label class="opcao">
+          <input type="checkbox" name="inteligencia" value="Mapa de participantes históricos">
+          <span class="texto">Mapa de participantes históricos</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="inteligencia" value="Leitura de preços (pleiteado e obtido)">
+          <span class="texto">Leitura de preços (pleiteado e obtido)</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="inteligencia" value="Raio-X de desclassificações">
+          <span class="texto">Raio-X de desclassificações</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="inteligencia" value="Análise dos documentos dos demais licitantes, quando publicados">
+          <span class="texto">Análise dos documentos dos demais licitantes, quando publicados</span>
+        </label>
+      </section>
+
+      <section>
+        <h2>4. Sobre a operação</h2>
+        <label class="campo" for="editais">
+          <span>Quantos editais vocês acompanham por mês, aproximadamente?</span>
+          <input type="text" id="editais" name="editais" inputmode="numeric" autocomplete="off">
+        </label>
+        <p class="rotulo">Abrangência de interesse</p>
+        <label class="opcao">
+          <input type="checkbox" name="abrangencia" value="Um município">
+          <span class="texto">Um município</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="abrangencia" value="Um estado">
+          <span class="texto">Um estado</span>
+        </label>
+        <label class="opcao">
+          <input type="checkbox" name="abrangencia" value="Âmbito federal">
+          <span class="texto">Âmbito federal</span>
+        </label>
+
+        <p class="rotulo" style="margin-top:16px">Período de histórico</p>
+        <label class="opcao">
+          <input type="radio" name="periodo" value="1 ano">
+          <span class="texto">1 ano</span>
+        </label>
+        <label class="opcao">
+          <input type="radio" name="periodo" value="2 anos">
+          <span class="texto">2 anos</span>
+        </label>
+        <label class="opcao opcao-outro">
+          <input type="radio" name="periodo" value="Outro" id="periodo-outro-radio">
+          <span class="texto">Outro</span>
+          <input type="text" id="periodo-outro" name="periodo_outro" placeholder="Informe o período" autocomplete="off" aria-label="Informe o período">
+        </label>
+
+        <p class="rotulo" style="margin-top:16px">Forma de entrega</p>
+        <label class="opcao">
+          <input type="radio" name="entrega" value="Relatório único">
+          <span class="texto">Relatório único</span>
+        </label>
+        <label class="opcao">
+          <input type="radio" name="entrega" value="Atualização periódica">
+          <span class="texto">Atualização periódica</span>
+        </label>
+
+        <p class="rotulo" style="margin-top:16px">Podemos agendar uma tarde com um operador de vocês, com acordo de confidencialidade assinado antes?</p>
+        <label class="opcao">
+          <input type="radio" name="reuniao" value="Sim">
+          <span class="texto">Sim</span>
+        </label>
+        <label class="opcao">
+          <input type="radio" name="reuniao" value="Não">
+          <span class="texto">Não</span>
+        </label>
+        <label class="opcao">
+          <input type="radio" name="reuniao" value="Prefiro conversar antes">
+          <span class="texto">Prefiro conversar antes</span>
+        </label>
+      </section>
+
+      <section>
+        <h2>5. Observações</h2>
+        <label class="campo" for="observacoes">
+          <span class="rotulo" style="position:absolute;left:-9999px">Observações</span>
+          <textarea id="observacoes" name="observacoes" rows="5"></textarea>
+        </label>
+      </section>
+
+      <button type="submit">Enviar pelo WhatsApp</button>
+      <p class="ajuda">As respostas abrem no seu WhatsApp como mensagem para a IVM. Basta confirmar o envio.</p>
+    </form>
+  </main>
+  <script>
+    (function () {
+      var WA_NUMBER = "5551993741005";
+      var MAX_LEN = 1800;
+
+      function val(id) {
+        var el = document.getElementById(id);
+        return el ? String(el.value || "").trim() : "";
+      }
+
+      function checkedValues(name) {
+        var nodes = document.querySelectorAll('input[name="' + name + '"]:checked');
+        var out = [];
+        for (var i = 0; i < nodes.length; i++) out.push(nodes[i].value);
+        return out;
+      }
+
+      function radioValue(name) {
+        var el = document.querySelector('input[name="' + name + '"]:checked');
+        return el ? el.value : "";
+      }
+
+      function bullets(items) {
+        return items.map(function (item) { return "• " + item; }).join("\n");
+      }
+
+      function buildMessage() {
+        var linhas = [];
+        linhas.push("Escopo IVM - respostas");
+        linhas.push("");
+        linhas.push("Empresa: " + (val("empresa") || "não informada"));
+        linhas.push("Nome e cargo: " + val("nome"));
+        linhas.push("");
+
+        var apoio = checkedValues("apoio");
+        if (apoio.length) {
+          linhas.push("1. Apoio administrativo e operacional nas licitações");
+          linhas.push(bullets(apoio));
+          linhas.push("");
+        }
+
+        var participacao = checkedValues("participacao");
+        if (participacao.length) {
+          linhas.push("2. Participação na disputa pela IVM");
+          linhas.push(bullets(participacao));
+          linhas.push("");
+        }
+
+        var intel = checkedValues("inteligencia");
+        if (intel.length) {
+          linhas.push("3. Inteligência de licitações");
+          linhas.push(bullets(intel));
+          linhas.push("");
+        }
+
+        var editais = val("editais");
+        var abrangencia = checkedValues("abrangencia");
+        var periodo = radioValue("periodo");
+        if (periodo === "Outro") {
+          var outro = val("periodo-outro");
+          periodo = outro ? "Outro: " + outro : "Outro";
+        }
+        var entrega = radioValue("entrega");
+        var reuniao = radioValue("reuniao");
+        var operacao = [];
+        if (editais) operacao.push("Editais por mês, aproximadamente: " + editais);
+        if (abrangencia.length) operacao.push("Abrangência: " + abrangencia.join("; "));
+        if (periodo) operacao.push("Período de histórico: " + periodo);
+        if (entrega) operacao.push("Forma de entrega: " + entrega);
+        if (reuniao) operacao.push("Reunião com operador: " + reuniao);
+        if (operacao.length) {
+          linhas.push("4. Sobre a operação");
+          linhas.push(bullets(operacao));
+          linhas.push("");
+        }
+
+        var obs = val("observacoes");
+        if (obs) {
+          linhas.push("5. Observações");
+          linhas.push(obs);
+        }
+
+        var msg = linhas.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+        if (msg.length > MAX_LEN) {
+          var corte = "\n[mensagem cortada]";
+          msg = msg.slice(0, MAX_LEN - corte.length).replace(/\s+\S*$/, "") + corte;
+        }
+        return msg;
+      }
+
+      var form = document.getElementById("form-escopo");
+      var campoNome = document.getElementById("campo-nome");
+      var erroNome = document.getElementById("erro-nome");
+      var inputNome = document.getElementById("nome");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var nome = val("nome");
+        if (!nome) {
+          erroNome.classList.add("visivel");
+          campoNome.classList.add("invalidado");
+          inputNome.focus();
+          return;
+        }
+        erroNome.classList.remove("visivel");
+        campoNome.classList.remove("invalidado");
+        var url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(buildMessage());
+        window.location.href = url;
+      });
+
+      inputNome.addEventListener("input", function () {
+        if (val("nome")) {
+          erroNome.classList.remove("visivel");
+          campoNome.classList.remove("invalidado");
+        }
+      });
+
+      window.__ivmBuildMessage = buildMessage;
+    })();
+  </script>
+</body>
+</html>
