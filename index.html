@@ -396,9 +396,13 @@
 
       <section>
         <h2>4. Sobre a operação</h2>
-        <label class="campo" for="editais">
-          <span>Quantos editais vocês acompanham por mês, aproximadamente?</span>
-          <input type="text" id="editais" name="editais" inputmode="numeric" autocomplete="off">
+        <label class="campo" for="editais-hoje">
+          <span>Quantos editais vocês disputam hoje, por mês (aproximadamente)</span>
+          <input type="text" id="editais-hoje" name="editais_hoje" inputmode="numeric" autocomplete="off">
+        </label>
+        <label class="campo" for="editais-expectativa">
+          <span>Quantos editais gostariam de disputar por mês</span>
+          <input type="text" id="editais-expectativa" name="editais_expectativa" inputmode="numeric" autocomplete="off">
         </label>
         <p class="rotulo">Abrangência de interesse</p>
         <label class="opcao">
@@ -526,7 +530,8 @@
           linhas.push("");
         }
 
-        var editais = val("editais");
+        var editaisHoje = val("editais-hoje");
+        var editaisExpectativa = val("editais-expectativa");
         var abrangencia = checkedValues("abrangencia");
         var periodo = radioValue("periodo");
         if (periodo === "Outro") {
@@ -536,7 +541,8 @@
         var entrega = radioValue("entrega");
         var reuniao = radioValue("reuniao");
         var operacao = [];
-        if (editais) operacao.push("Editais por mês, aproximadamente: " + editais);
+        if (editaisHoje) operacao.push("Editais disputados hoje, por mês: " + editaisHoje);
+        if (editaisExpectativa) operacao.push("Editais que gostariam de disputar, por mês: " + editaisExpectativa);
         if (abrangencia.length) operacao.push("Abrangência: " + abrangencia.join("; "));
         if (periodo) operacao.push("Período de histórico: " + periodo);
         if (entrega) operacao.push("Forma de entrega: " + entrega);
