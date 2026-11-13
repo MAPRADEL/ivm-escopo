@@ -315,6 +315,49 @@
       font-weight: 400;
       color: #E7EAEF;
     }
+
+    .opcao.destaque {
+      border-color: var(--ouro);
+      background: #F8F4EE;
+      align-items: flex-start;
+    }
+
+    .opcao.destaque:has(input:checked) {
+      background: #F3EEE6;
+      border-color: var(--ouro);
+    }
+
+    .opcao.destaque .texto {
+      font-weight: 700;
+      color: var(--azul);
+    }
+
+    .opcao.destaque .nota {
+      display: block;
+      font-weight: 400;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: var(--grafite);
+      margin-top: 4px;
+    }
+
+    .opcao.incluido {
+      background: var(--fundo-marcado);
+      border-color: #C5CED8;
+      box-shadow: inset 3px 0 0 var(--ouro);
+      cursor: default;
+    }
+
+    .opcao.incluido input {
+      cursor: default;
+    }
+
+    .nota-campo {
+      margin: 4px 0 0;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: #5A616C;
+    }
   </style>
 </head>
 <body>
@@ -342,7 +385,17 @@
       </section>
 
       <section>
-        <h2>1. Apoio administrativo e operacional nas licitações</h2>
+        <h2>1. Serviço completo da IVM</h2>
+        <label class="opcao destaque">
+          <input type="checkbox" id="servico-completo" name="servico_completo" value="Serviço completo da IVM">
+          <span class="texto">Serviço completo da IVM
+            <span class="nota">(ao marcar esta opção, todos os demais serviços, das três frentes, já estão incluídos)</span>
+          </span>
+        </label>
+      </section>
+
+      <section>
+        <h2>2. Apoio administrativo e operacional nas licitações</h2>
         <label class="opcao">
           <input type="checkbox" name="apoio" value="Busca de editais pré-qualificados (repositório compartilhado, por critérios como valor mínimo e objeto)">
           <span class="texto">Busca de editais pré-qualificados (repositório compartilhado, por critérios como valor mínimo e objeto)</span>
@@ -370,7 +423,7 @@
       </section>
 
       <section>
-        <h2>2. Participação na disputa pela IVM</h2>
+        <h2>3. Participação na disputa pela IVM</h2>
         <label class="opcao">
           <input type="checkbox" name="participacao" value="Participação completa na disputa: organização de cadastros, certidões e atestados; montagem e envio da proposta e dos documentos; operação da sessão e dos lances, dentro do valor inicial e do mínimo definidos pela sua empresa">
           <span class="texto">Participação completa na disputa: organização de cadastros, certidões e atestados; montagem e envio da proposta e dos documentos; operação da sessão e dos lances, dentro do valor inicial e do mínimo definidos pela sua empresa</span>
@@ -378,7 +431,7 @@
       </section>
 
       <section>
-        <h2>3. Inteligência de licitações</h2>
+        <h2>4. Inteligência de licitações</h2>
         <p class="lead">A pesquisa mostra o que o edital não conta: quais empresas já disputaram contratos desse tipo na região, em que faixa a disputa costumou fechar e quais falhas registradas afastaram participantes. Os estudos tratam de participantes históricos e apoiam a decisão de participar e de precificar, sem garantia de resultado.</p>
         <label class="opcao">
           <input type="checkbox" name="inteligencia" value="Mapa de participantes históricos">
@@ -399,7 +452,7 @@
       </section>
 
       <section>
-        <h2>4. Sobre a operação</h2>
+        <h2>5. Sobre a operação</h2>
         <label class="campo" for="editais-hoje">
           <span>Quantos editais vocês disputam hoje, por mês (aproximadamente)</span>
           <input type="text" id="editais-hoje" name="editais_hoje" inputmode="numeric" autocomplete="off">
@@ -421,6 +474,7 @@
           <input type="checkbox" name="abrangencia" value="Âmbito federal">
           <span class="texto">Âmbito federal</span>
         </label>
+        <p class="nota-campo">Se marcar município ou estado, informe quantos no campo de expectativas (seção 6).</p>
 
         <p class="rotulo" style="margin-top:16px">Período de histórico</p>
         <label class="opcao">
@@ -463,7 +517,7 @@
       </section>
 
       <section>
-        <h2>5. Expectativas</h2>
+        <h2>6. Expectativas</h2>
         <label class="campo" for="expectativas">
           <span>O que vocês esperam alcançar com o apoio da IVM? (resultados, desempenho, onde a IVM pode ajudar mais)</span>
           <textarea id="expectativas" name="expectativas" rows="5"></textarea>
@@ -517,25 +571,31 @@
         linhas.push("Nome e cargo: " + val("nome"));
         linhas.push("");
 
-        var apoio = checkedValues("apoio");
-        if (apoio.length) {
-          linhas.push("1. Apoio administrativo e operacional nas licitações");
-          linhas.push(bullets(apoio));
+        var completo = document.getElementById("servico-completo").checked;
+        if (completo) {
+          linhas.push("1. Serviço completo da IVM (inclui todos os serviços)");
           linhas.push("");
-        }
+        } else {
+          var apoio = checkedValues("apoio");
+          if (apoio.length) {
+            linhas.push("2. Apoio administrativo e operacional nas licitações");
+            linhas.push(bullets(apoio));
+            linhas.push("");
+          }
 
-        var participacao = checkedValues("participacao");
-        if (participacao.length) {
-          linhas.push("2. Participação na disputa pela IVM");
-          linhas.push(bullets(participacao));
-          linhas.push("");
-        }
+          var participacao = checkedValues("participacao");
+          if (participacao.length) {
+            linhas.push("3. Participação na disputa pela IVM");
+            linhas.push(bullets(participacao));
+            linhas.push("");
+          }
 
-        var intel = checkedValues("inteligencia");
-        if (intel.length) {
-          linhas.push("3. Inteligência de licitações");
-          linhas.push(bullets(intel));
-          linhas.push("");
+          var intel = checkedValues("inteligencia");
+          if (intel.length) {
+            linhas.push("4. Inteligência de licitações");
+            linhas.push(bullets(intel));
+            linhas.push("");
+          }
         }
 
         var editaisHoje = val("editais-hoje");
@@ -556,7 +616,7 @@
         if (entrega) operacao.push("Forma de entrega: " + entrega);
         if (reuniao) operacao.push("Reunião com operador: " + reuniao);
         if (operacao.length) {
-          linhas.push("4. Sobre a operação");
+          linhas.push("5. Sobre a operação");
           linhas.push(bullets(operacao));
           linhas.push("");
         }
@@ -564,7 +624,7 @@
         var expectativas = val("expectativas");
         var obs = val("observacoes");
         if (expectativas || obs) {
-          linhas.push("5. Expectativas");
+          linhas.push("6. Expectativas");
           if (expectativas) linhas.push(expectativas);
           if (obs) linhas.push("Observações: " + obs);
         }
@@ -576,6 +636,42 @@
         }
         return msg;
       }
+
+      var servicoCompleto = document.getElementById("servico-completo");
+      var savedServiceState = null;
+
+      function serviceBoxes() {
+        return document.querySelectorAll('input[name="apoio"], input[name="participacao"], input[name="inteligencia"]');
+      }
+
+      function applyCompleto(on) {
+        var boxes = serviceBoxes();
+        var i, opcao;
+        if (on) {
+          savedServiceState = [];
+          for (i = 0; i < boxes.length; i++) {
+            savedServiceState.push(boxes[i].checked);
+            boxes[i].checked = true;
+            boxes[i].disabled = true;
+            opcao = boxes[i].closest(".opcao");
+            if (opcao) opcao.classList.add("incluido");
+          }
+        } else {
+          for (i = 0; i < boxes.length; i++) {
+            boxes[i].disabled = false;
+            opcao = boxes[i].closest(".opcao");
+            if (opcao) opcao.classList.remove("incluido");
+            if (savedServiceState && i < savedServiceState.length) {
+              boxes[i].checked = savedServiceState[i];
+            }
+          }
+          savedServiceState = null;
+        }
+      }
+
+      servicoCompleto.addEventListener("change", function () {
+        applyCompleto(this.checked);
+      });
 
       var form = document.getElementById("form-escopo");
       var campoNome = document.getElementById("campo-nome");
