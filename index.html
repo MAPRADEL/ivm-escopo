@@ -141,6 +141,10 @@
       resize: vertical;
     }
 
+    textarea.curto {
+      min-height: 80px;
+    }
+
     input[type="text"]:focus,
     textarea:focus,
     .opcao:focus-within {
@@ -459,10 +463,14 @@
       </section>
 
       <section>
-        <h2>5. Observações</h2>
+        <h2>5. Expectativas</h2>
+        <label class="campo" for="expectativas">
+          <span>O que vocês esperam alcançar com o apoio da IVM? (resultados, desempenho, onde a IVM pode ajudar mais)</span>
+          <textarea id="expectativas" name="expectativas" rows="5"></textarea>
+        </label>
         <label class="campo" for="observacoes">
-          <span class="rotulo" style="position:absolute;left:-9999px">Observações</span>
-          <textarea id="observacoes" name="observacoes" rows="5"></textarea>
+          <span>Observações</span>
+          <textarea id="observacoes" name="observacoes" rows="3" class="curto"></textarea>
         </label>
       </section>
 
@@ -553,10 +561,12 @@
           linhas.push("");
         }
 
+        var expectativas = val("expectativas");
         var obs = val("observacoes");
-        if (obs) {
-          linhas.push("5. Observações");
-          linhas.push(obs);
+        if (expectativas || obs) {
+          linhas.push("5. Expectativas");
+          if (expectativas) linhas.push(expectativas);
+          if (obs) linhas.push("Observações: " + obs);
         }
 
         var msg = linhas.join("\n").replace(/\n{3,}/g, "\n\n").trim();
